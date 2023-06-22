@@ -5,13 +5,14 @@ class MkData():
     """
     Make the dataset.
     """
-    def __init__(self):#, num_h1, num_h2, sampleNum, dx, HH):
-        self.sampleNum = 512
-        self.layerNum = 3
-        self.num_h1 = 20
-        self.num_h2 = 20
-        self.dx = 0.8
-        self.HH = 200.
+    def __init__(self, sampleNum=512, layerNum=3, num_h1=20, num_h2=20, dx=0.8, depth_end=200., freqs_end=50):
+        self.sampleNum = sampleNum
+        self.layerNum = layerNum
+        self.num_h1 = num_h1
+        self.num_h2 = num_h2
+        self.dx = dx
+        self.depth_end = depth_end
+        self.freqs_end = freqs_end
         self.HVSR = torch.zeros((4, 8, 2, self.num_h1, self.num_h2, self.sampleNum))
         self.VVs = torch.zeros((4, 8, 2, self.num_h1, self.num_h2, self.sampleNum))
 
@@ -103,13 +104,12 @@ class MkData():
                 Damp[i] = 1/(2 * 0.16 * vs)
         return Damp
 
-    def getHVSR(self, v1, v2, v3, num_h1, num_h2, dx, HH, sampleNum, HVSR, VVs):
+    def getHVSR(self, v1, v2, v3, num_h1, num_h2, dx, depth_end, sampleNum, HVSR, VVs, freqs_end):
         for h1 in range(0, num_h1,):
             for h2 in range(0, num_h2,):
-
                 H1 = h1 * dx + 1
                 H2 = h2 * dx + 1
-                H3 = HH - H1 - H2
+                H3 = depth_end - H1 - H2
                 H = [H1, H2, H3]
                 Vs = [v1, v2, v3]
                 Den = self.den(Vs)
@@ -119,7 +119,7 @@ class MkData():
 
                 #model_x, model_y = self.set_array(H, Vs, depthmax)
 
-                freqs = torch.linspace(0, 50, sampleNum)
+                freqs = torch.linspace(0, freqs_end, sampleNum)
                 HVSR[int((v1-200)/50)][int((v2-400)/50)][int((v3-600)/50)][h1][h2] = self.calc_hvsr(Vs, H, Den, Damp, freqs)
 
                 VVs[int((v1-200)/50)][int((v2-400)/50)][int((v3-600)/50)][h1][h2][0:h1*5] =  Vs[0]
@@ -133,14 +133,15 @@ class MkData():
         num_h2 = self.num_h2
         sampleNum = self.sampleNum
         dx = self.dx
-        HH = self.HH
+        depth_end = self.depth_end
         HVSR = self.HVSR
         VVs = self.VVs
+        freqs_end = self.freqs_end
 
         for v1 in range(200, 400, 50):
             for v2 in range(400, 800, 50):
                 for v3 in range(600, 700, 50):
-                    HVSR, VVs = self.getHVSR(v1, v2, v3, num_h1, num_h2, dx, HH, sampleNum, HVSR, VVs)
+                    HVSR, VVs = self.getHVSR(v1, v2, v3, num_h1, num_h2, dx, depth_end, sampleNum, HVSR, VVs, freqs_end)
 
                     
 

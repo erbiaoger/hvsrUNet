@@ -21,4 +21,5 @@ def train(model, criterion, optimizer, train_iter, num_epochs=20):
                 print('Epoch [{}/{}], Iteration [{}/{}], Loss: {:.4f}'.\
                     format(epoch+1, num_epochs, i+1, len(train_iter), loss.item()))
         losses.append(loss.item())
+        
     return model, losses

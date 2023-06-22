@@ -1,20 +1,22 @@
 import matplotlib.pyplot as plt
 import os
+import torch
 
-def setArray(true_v, syn_v, X):
+def setArray(depth, freq, true_v, syn_v, X):
     """
     Set the x and y coordinates of the model layers.
     """
 
     # 创建子图
-    fig = plt.figure(figsize=(8, 4))
+    fig = plt.figure(figsize=(10, 5))
+    fig.suptitle(f'H/V Spectra and Velocity Model (depth: 0-{depth[-1]}m, freq: 0-{freq[-1]}Hz)')
     ax1 = fig.add_subplot(1, 2, 1)
 
     # 绘制第一条曲线
     color = 'tab:red'
     ax1.set_xlabel('depth [m]')
     ax1.set_ylabel('true velocity [m/s]', color=color)
-    ax1.plot(true_v, label='true', color=color)
+    ax1.plot(depth, true_v, label='true', color=color)
     ax1.tick_params(axis='y', labelcolor=color)
     ax1.set_ylim([80, 920])
 
@@ -24,7 +26,7 @@ def setArray(true_v, syn_v, X):
     # 绘制第二条曲线
     color = 'tab:green'
     ax2.set_ylabel('model velocity [m/s]', color=color)
-    ax2.plot(syn_v, label='synthetic', color=color)
+    ax2.plot(depth, syn_v, label='synthetic', color=color)
     ax2.tick_params(axis='y', labelcolor=color)
     ax2.set_ylim([80, 920])
 
@@ -34,9 +36,9 @@ def setArray(true_v, syn_v, X):
 
     # 创建子图
     ax3 = fig.add_subplot(1, 2, 2)
-    ax3.set_xlabel('depth [m]')
+    ax3.set_xlabel('frequence [Hz]')
     ax3.set_ylabel('amplitude')
-    ax3.plot(X[0][0][0], label='HVSR', color='tab:blue')
+    ax3.plot(freq, X[0][0][0], label='HVSR', color='tab:blue')
     ax3.set_title('H/V Spectra')
     ax3.legend(loc='upper right')
 
@@ -46,13 +48,15 @@ def setArray(true_v, syn_v, X):
     # 显示图像
     plt.show()
 
-def plotTest(model, test_iter, style=False):
+def plotTest(model, test_iter, depth_end=200., freqs_end=10, style=False):
     X, y = next(iter(test_iter))
     yyy = model(X)
     j = 30
 
     true_v = 100*y[j][0][0].detach().numpy()
     syn_v = 100*yyy[j][0][0].detach().numpy()
+    depth = torch.linspace(0, depth_end, len(true_v))
+    freq = torch.linspace(0, freqs_end, len(true_v))
 
     if style == True:
         print(os.getcwd())
@@ -63,10 +67,10 @@ def plotTest(model, test_iter, style=False):
 
 
         with plt.style.context(mpl_path):
-            setArray(true_v, syn_v, X)
+            setArray(depth, freq, true_v, syn_v, X)
     else:
         with plt.style.context('ggplot'):
-            setArray(true_v, syn_v, X)
+            setArray(depth, freq, true_v, syn_v, X)
 
     
 
