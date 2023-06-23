@@ -33,8 +33,8 @@ markers.fillstyle: full
 patch.linewidth        : 1.0     # edge width in points
 patch.facecolor        : none
 patch.force_edgecolor  : True
-#patch.edgecolor        : k
-patch.edgecolor        : none # 用
+patch.edgecolor        : k
+#patch.edgecolor        : none # 用
 patch.antialiased      : True    # render patches in antialiased (no jaggies)
 
 #hatch.color            : k
@@ -101,7 +101,7 @@ font.monospace : DejaVu Sans Mono, Andale Mono, Nimbus Mono L, Courier New, Cour
 # https://matplotlib.org/api/artist_api.html#module-matplotlib.text for more
 # information on text properties
 
-text.color          : w
+text.color          : black
 
 ### LaTeX customizations. See http://www.scipy.org/Wiki/Cookbook/Matplotlib/UsingTex
 text.usetex         : False  # use latex for all text handling. The following fonts
@@ -174,8 +174,8 @@ mathtext.default : it # The default font to use for math.
 # default fontsizes for ticklabels, and so on.  See
 # https://matplotlib.org/api/axes_api.html#module-matplotlib.axes
 #axes.facecolor      : w       # axes background color
-axes.facecolor      : none       # axes background color
-axes.edgecolor      : w       # axes edge color
+axes.facecolor      : none      # axes background color
+axes.edgecolor      : green       # axes edge color
 axes.linewidth      : 1.0     # edge linewidth
 axes.grid           : False   # display grid or not
 axes.grid.which     : major
@@ -187,7 +187,7 @@ axes.titleweight    : normal  # font weight for axes title
 axes.labelsize      : medium  # fontsize of the x any y labels
 axes.labelpad       : 5.0     # space between label and axis
 axes.labelweight    : normal  # weight of the x and y labels
-axes.labelcolor     : w
+axes.labelcolor     : green
 axes.axisbelow      : False   # whether axis gridlines and ticks are below
                               # the axes elements (lines, text, etc)
 
@@ -249,7 +249,7 @@ xtick.major.width    : 0.5    # major tick width in points
 xtick.minor.width    : 0.5    # minor tick width in points
 xtick.major.pad      : 4      # distance to major tick label in points
 xtick.minor.pad      : 4      # distance to the minor tick label in points
-xtick.color          : w      # color of the tick labels
+xtick.color          : green      # color of the tick labels
 xtick.labelsize      : medium # fontsize of the tick labels
 xtick.direction      : in     # direction: in, out, or inout
 xtick.major.top      : True   # draw x axis top major ticks
@@ -267,7 +267,7 @@ ytick.major.width    : 0.5    # major tick width in points
 ytick.minor.width    : 0.5    # minor tick width in points
 ytick.major.pad      : 4      # distance to major tick label in points
 ytick.minor.pad      : 4      # distance to the minor tick label in points
-ytick.color          : w      # color of the tick labels
+ytick.color          : green     # color of the tick labels
 ytick.labelsize      : medium # fontsize of the tick labels
 ytick.direction      : in     # direction: in, out, or inout
 ytick.major.left     : True   # draw y axis left major ticks
@@ -301,8 +301,9 @@ legend.shadow        : False
 legend.frameon       : True   # whether or not to draw a frame around legend
 legend.framealpha    : None    # opacity of legend frame
 legend.scatterpoints : 3 # number of scatter points
-legend.facecolor     : inherit   # legend background color (when 'inherit' uses axes.facecolor)
-legend.edgecolor     : inherit   # legend edge color (when 'inherit' uses axes.edgecolor)
+#legend.facecolor     : inherit   # legend background color (when 'inherit' uses axes.facecolor)
+legend.facecolor     : none
+legend.edgecolor     : none   # legend edge color (when 'inherit' uses axes.edgecolor)
 
 
 
@@ -314,6 +315,7 @@ figure.labelsize:   medium    # size of the figure label
 figure.labelweight: normal    # weight of the figure label
 figure.figsize   : 8, 6    # figure size in inches
 figure.dpi       : 80      # figure dots per inch
+#figure.facecolor : none    # figure facecolor; 0.75 is scalar gray
 figure.facecolor : none    # figure facecolor; 0.75 is scalar gray
 figure.edgecolor : w       # figure edgecolor
 figure.autolayout : False  # When True, automatically adjust subplot
