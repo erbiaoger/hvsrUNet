@@ -1,7 +1,9 @@
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/erbiaoger/PicGo/main/20230608202306091328187.png" alt="hvsrUNet" width="600">
+  <img src="https://raw.githubusercontent.com/erbiaoger/PicGo/main/20230608202306211130554.png" alt="hvsrUNet" width="600">
       <br>hvsrUNet<br>
 </h1>
+
+
 
 
 <h4 align="center">hvsrUNet - open source software for HVSR analysis with deep learning.</h4>
@@ -22,17 +24,24 @@
   </a>
 </p>
 
+
 [English](https://github.com/erbiaoger/hvsrUNet/blob/main/Readme.md)  |  [中文](https://github.com/erbiaoger/hvsrUNet/blob/main/Readme_cn.md)
 
 
 
-
-
-
-## Test
----
+## Loss
 
 ![image-20230621214241767](https://raw.githubusercontent.com/erbiaoger/PicGo/main/20230608202306212142868.png)
+
+
+
+## Synthetic Test
+
+---
+
+
+
+### depth: 0~200m frequency: 0~50Hz
 
 
 
@@ -42,8 +51,15 @@
 
 ![image-20230621214316645](https://raw.githubusercontent.com/erbiaoger/PicGo/main/20230608202306212143671.png)
 
-![image-20230621112458656](https://raw.githubusercontent.com/erbiaoger/PicGo/main/20230608202306211124782.png)
+### depth: 0~200m frequency: 0~10Hz
 
-![image-20230621113616166](https://raw.githubusercontent.com/erbiaoger/PicGo/main/20230608202306211136222.png)
+![image-20230622212249198](https://raw.githubusercontent.com/erbiaoger/PicGo/main/20230608202306222122257.png)
 
-![image-20230621113015495](https://raw.githubusercontent.com/erbiaoger/PicGo/main/20230608202306211130554.png)
+
+## True Data
+
+---
+
+### LOW_FREQUENCY/A/S0173a
+
+![image-20230622212302844](https://raw.githubusercontent.com/erbiaoger/PicGo/main/20230608202306222123869.png)
