@@ -84,3 +84,28 @@ def plotLoss(losses):
         ax.set_title('Loss Curve')
         ax.legend()
         plt.show()
+
+def plotHVSR(X, freqs_end=10.):
+    i = 0
+    freq = torch.linspace(0, freqs_end, len(X))
+    x = torch.linspace(0, 10, len(X[i, 0, 0, :]))
+    with plt.style.context('ggplot'):
+        plt.plot(x, X[i, 0, 0, :].numpy(), label='HVSR')
+        plt.xlabel('Frequency [Hz]')
+        plt.ylabel('Amplitude')
+        plt.legend(loc='upper right')
+        plt.title('HVSR')
+        plt.show()
+
+def plotModel(y, depth_end=200.):
+    v = 100*y[0][0][0].detach().numpy()
+    depth = torch.linspace(0, depth_end, len(v))
+
+    with plt.style.context('ggplot'):
+        plt.plot(depth, v, label='true', color='tab:red')
+        plt.xlabel('depth [m]')
+        plt.ylabel('true velocity [m/s]')
+        plt.ylim([80, 920])
+        plt.legend(loc='upper left')
+        plt.title('Velocity Model')
+        plt.show()

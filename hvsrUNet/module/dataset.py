@@ -1,3 +1,4 @@
+from typing import Any
 from sklearn.model_selection import train_test_split
 import torch
   
@@ -5,7 +6,19 @@ class MkData():
     """
     Make the dataset.
     """
-    def __init__(self, sampleNum=512, layerNum=3, num_h1=20, num_h2=20, dx=0.8, depth_end=200., freqs_end=50):
+    def __init__(self):
+        # self.sampleNum = sampleNum
+        # self.layerNum = layerNum
+        # self.num_h1 = num_h1
+        # self.num_h2 = num_h2
+        # self.dx = dx
+        # self.depth_end = depth_end
+        # self.freqs_end = freqs_end
+        # self.HVSR = torch.zeros((4, 8, 2, self.num_h1, self.num_h2, self.sampleNum))
+        # self.VVs = torch.zeros((4, 8, 2, self.num_h1, self.num_h2, self.sampleNum))
+        pass
+
+    def __call__(self, sampleNum=512, layerNum=3, num_h1=20, num_h2=20, dx=0.8, depth_end=200., freqs_end=50):
         self.sampleNum = sampleNum
         self.layerNum = layerNum
         self.num_h1 = num_h1
@@ -15,6 +28,11 @@ class MkData():
         self.freqs_end = freqs_end
         self.HVSR = torch.zeros((4, 8, 2, self.num_h1, self.num_h2, self.sampleNum))
         self.VVs = torch.zeros((4, 8, 2, self.num_h1, self.num_h2, self.sampleNum))
+
+        train_iter, test_iter = self.getIter()
+
+        return train_iter, test_iter
+
 
     def set_array(self, thickness, velocity, depth_max):
         """
@@ -120,6 +138,7 @@ class MkData():
                 #model_x, model_y = self.set_array(H, Vs, depthmax)
 
                 freqs = torch.linspace(0, freqs_end, sampleNum)
+                ## main function to get HVSR
                 HVSR[int((v1-200)/50)][int((v2-400)/50)][int((v3-600)/50)][h1][h2] = self.calc_hvsr(Vs, H, Den, Damp, freqs)
 
                 VVs[int((v1-200)/50)][int((v2-400)/50)][int((v3-600)/50)][h1][h2][0:h1*5] =  Vs[0]
