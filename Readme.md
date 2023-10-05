@@ -32,6 +32,7 @@
   - [depth: `0~200m` frequency: `0~10Hz`](#depth-0200m-frequency-010hz)
 - [True Data](#true-data)
   - [LOW\_FREQUENCY\_A\_S0173a](#low_frequency_a_s0173a)
+- [New](#new)
 
 
 ## Loss
@@ -68,3 +69,16 @@
 ### LOW_FREQUENCY_A_S0173a
 
 ![image-20230622212302844](https://raw.githubusercontent.com/erbiaoger/PicGo/main/20230608202306222123869.png)
+
+
+
+
+## New
+
+![](https://raw.githubusercontent.com/erbiaoger/PicGo/main/20231005145746.png)
+
+
+![](https://raw.githubusercontent.com/erbiaoger/PicGo/main/2023-10-05172407e7-4443-4cc1-884d-fb241b68ed57.png)
+
+
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch "parameter/*" ' --prune-empty --tag-name-filter cat -- --all
