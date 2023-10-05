@@ -3,6 +3,7 @@ data/*
 examples/checkpoints/
 examples/model_parameter/
 examples/*.npz
+examples/*.pt
 test-data/
 
 # Byte-compiled / optimized / DLL files
