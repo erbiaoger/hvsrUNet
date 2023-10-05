@@ -44,7 +44,7 @@ setup(
     },
 
     keywords='horizontal-to-vertical spectral ratio hv hvsr deep learning',
-    install_requires=['torch', 'matplotlib', 'sklearn'],
+    #install_requires=['torch', 'matplotlib', 'sklearn'],
     #entry_points={'console_scripts': ['hvsrUNet = hvsrUNet.__main__:main']},
     # entry_points={
     #     'console_scripts': [
