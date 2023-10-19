@@ -80,5 +80,3 @@
 
 ![](https://raw.githubusercontent.com/erbiaoger/PicGo/main/2023-10-05172407e7-4443-4cc1-884d-fb241b68ed57.png)
 
-
-git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch "parameter/*" ' --prune-empty --tag-name-filter cat -- --all

@@ -34,20 +34,21 @@ from keras.layers.merge import concatenate
 
 
 
-def GPRNet(im_width=1, im_height=1200, neurons=8, kern_sz = 10, enable_dropout=False,dp_coeff=0.2):
+def HVDP(im_width=1, im_height=1200, neurons=8, kern_sz = 10, enable_dropout=False,dp_coeff=0.2):
     ''' Zero dropout is similar to the original version (without dropout)'''
 
-    
-    img_width = im_width
-    img_height = im_height
-    input_img = Input((img_height,img_width))
-    
     if enable_dropout==True:
         dropout_params = np.ones(16)*dp_coeff
     else:
         dropout_params = np.zeros(16)
 
     #encoder
+    input_img1 = Input((im_height,im_width))
+    input_img2 = Input((im_height,im_width))
+    conv_img1 = Conv1D(neurons, kernel_size=kern_sz, strides=1, activation='relu', padding='same', name='Conv_img1')(input_img1)
+    conv_img2 = Conv1D(neurons, kernel_size=kern_sz, strides=1, activation='relu', padding='same', name='Conv_img2')(input_img2)
+    input_img = concatenate([conv_img1,conv_img2],name='Merge0')
+
     conv1 = Conv1D(neurons, kernel_size=kern_sz, strides=1, activation='relu', padding='same', name='Conv1')(input_img)
     pool1 = MaxPooling1D(2, name='Pool1') (conv1) #640
     pool1 = Dropout(dropout_params[0], name='Dropout1')(pool1,training=True) #
@@ -110,7 +111,7 @@ def GPRNet(im_width=1, im_height=1200, neurons=8, kern_sz = 10, enable_dropout=F
     deconv5 = Conv1D(1, kernel_size=kern_sz, strides=1, activation='relu',padding='same', name='Deconv5')(up4)
     deconv5 = GaussianDropout(dropout_params[15], name='Dropout16')(deconv5,training=True)
 
-    model = Model(inputs=[input_img], outputs=[deconv5])
+    model = Model(inputs=[input_img1, input_img2], outputs=[deconv5])
     
     return model
     
